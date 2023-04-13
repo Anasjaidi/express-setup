@@ -1,3 +1,6 @@
+
+const prismaErrors = require('./prisma/prismaErrors')
+
 const proErrors = (err, res) => {
 
 
@@ -51,6 +54,9 @@ module.exports = (err, req, res, next) => {
 	} else if (req.app.get("env") === "testing") {
 		// 
 	} else {
+		if (err.code === 'P2002') {
+			return prismaErrors.uniqueValueError(err, res)
+		}
 		// production
 	}
 };
