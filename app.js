@@ -11,12 +11,12 @@ const userRouter = require('./routers/userRouter')
 dotenv.config("./.env");
 
 // select settings for choosen mode
+const env = process.env.NODE_ENV;
 const {
 	corsOptions,
 	name,
 	app: { port, debug, logger_format },
 } = require("./config/settings.conf")(env);
-const env = process.env.NODE_ENV;
 
 // create instance from express
 const app = express();
@@ -44,3 +44,5 @@ app.use('*', (req, res, next) => {
 
 // start error Gateway
 app.use(ErrorsGateway)
+
+module.exports = app

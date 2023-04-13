@@ -14,7 +14,7 @@ class UserDAO {
 	}
 
 	async addNewUser(user) {
-		return await user.create({ data: user });
+		return await prisma.user.create({ data: user });
 	}
 
 	async getUserByID(ID) {

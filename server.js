@@ -31,9 +31,8 @@ process.on("unhandledRejection", (err) => {
 	});
 });
 
-process.on("uncaughtException", (err) => {
-	console.log("Uncaught Exception 💥 Server shuting Down...");
-	console.log(err.name, err.message);
+process.on("SIGINT", () => {
+	console.log("\nCTRL^C 💥 Server shuting Down...");
 	server.close(() => {
 		process.exit(1);
 	});

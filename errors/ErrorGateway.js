@@ -1,6 +1,6 @@
 const proErrors = (err, res) => {
 
-	
+
 	if (err.isOperational) {
 		// opeartional, trusted: send error to the client
 
@@ -47,7 +47,9 @@ module.exports = (err, req, res, next) => {
 	err.status = err.status || "error";
 
 	if (req.app.get("env") === "development") {
+		devErrors(err, res)
 	} else if (req.app.get("env") === "testing") {
+		// 
 	} else {
 		// production
 	}
