@@ -1,5 +1,5 @@
 const express = require("express");
-const AppError = require("http-errors");
+const AppError = require("./errors/AppError");
 const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");

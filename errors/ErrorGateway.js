@@ -29,6 +29,7 @@ const testErrors = (err, res) => {
 		err,
 	});
 };
+
 const devErrors = (err, res) => {
 	res.status(err.statusCode).json({
 		status: err.status,
