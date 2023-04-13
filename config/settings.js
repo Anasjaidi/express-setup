@@ -17,6 +17,4 @@ const proConfig = { ...CommonConfs, name: "production" };
 
 const configs = [devConfig, testConfig, proConfig];
 
-module.exports = (mode = "development") => {
-	configs.find((conf) => conf.app.name === mode);
-};
+module.exports = (mode = "development") => configs.find((conf) => conf.name === mode)
