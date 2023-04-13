@@ -4,16 +4,17 @@ const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
+const ErrorsGateway = require('./errors/ErrorGateway')
 
 // append .env vars to envirement variables
-dotenv.config("./.env.test");
+dotenv.config("./.env");
 
 // select settings for choosen mode
 const {
 	corsOptions,
 	name,
 	app: { port, debug, logger_format },
-} = require("./config/settings")(env);
+} = require("./config/settings.conf")(env);
 const env = process.env.NODE_ENV;
 
 // create instance from express
@@ -38,4 +39,4 @@ app.use('*', (req, res, next) => {
 })
 
 // start error Gateway
-app.use()
+app.use(ErrorsGateway)
