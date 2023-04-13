@@ -6,6 +6,9 @@ const path = require("path");
 // create instance from express
 const app = express();
 
+// append .env vars to envirement variables
+dotenv.config('./.env')
+
 // initialize middlewares
 app.use(cors());
 app.use(express.json());
