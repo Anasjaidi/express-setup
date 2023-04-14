@@ -6,6 +6,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const ErrorsGateway = require('./errors/ErrorGateway')
 const userRouter = require('./routers/userRouter')
+const homeRouter = require('./routers/homeRouter')
 
 // append .env vars to envirement variables
 dotenv.config("./.env");
@@ -30,11 +31,12 @@ app.set("env", name);
 app.use(cors());
 app.use(express.json());
 app.use(morgan(process.env.MORGAN_MODE));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "./public"), { dotfiles: false }));
+// app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "./public"), { dotfiles: "ignore" }));
 
 // start resources
 app.use('/api/v1/user', userRouter)
+app.use('/api/v1', homeRouter)
 
 
 // start deafult route

@@ -19,10 +19,11 @@ const signIn = ErrorsWrapper(async (req, res, next) => {
 	if (!email || !password)
 		next(new AppError.BadRequest("email or password are missings."));
 
-	await auth.signin({ email, password });
+	const token = await auth.signin({ email, password });
 
 	res.status(200).json({
 		status: "success",
+		token
 	});
 });
 

@@ -56,6 +56,8 @@ module.exports = (err, req, res, next) => {
 	} else {
 		if (err.code === 'P2002') {
 			return prismaErrors.uniqueValueError(err, res)
+		} else if (err.name === "JsonWebTokenError") {
+			return prismaErrors.invalidToken(err, res)
 		}
 		// production
 	}

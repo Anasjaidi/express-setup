@@ -6,4 +6,13 @@ const uniqueValueError = (err, res) => {
   })
 }
 
-module.exports = {uniqueValueError}
+
+const invalidToken = (err, res) => {
+  const message = "invalid token, please re login."
+  res.status(401).json({
+    status: "fail",
+    message
+  })
+}
+
+module.exports = {uniqueValueError, invalidToken}
