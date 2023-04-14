@@ -58,7 +58,9 @@ module.exports = (err, req, res, next) => {
 			return prismaErrors.uniqueValueError(err, res)
 		} else if (err.name === "JsonWebTokenError") {
 			return prismaErrors.invalidToken(err, res)
+		} else if (err.name === "TokenExpiredError") {
+			return prismaErrors.expiredToken(err, res)
 		}
-		// production
+		proErrors(err, res);
 	}
 };

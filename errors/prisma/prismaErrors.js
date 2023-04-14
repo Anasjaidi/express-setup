@@ -15,4 +15,13 @@ const invalidToken = (err, res) => {
   })
 }
 
-module.exports = {uniqueValueError, invalidToken}
+const expiredToken = (err, res) => {
+  const message = "token expired, please re login"
+  res.status(401).json({
+		status: "fail",
+		message,
+		expiredAt: err.expiredAt,
+	});
+}
+
+module.exports = {uniqueValueError, invalidToken, expiredToken}
