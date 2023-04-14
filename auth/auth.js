@@ -59,7 +59,17 @@ class Auth {
       next(AppError.Unauthorized("no user found."));
     }
 
-    console.log(user);
+    if (user.passwordChangeAt) {
+      if (parseInt(user.passwordChangeAt.getTime() / 1000, 10) > decoded.iat)
+				next(
+					new AppError(
+						401,
+						"password changes after the token was issued please, re signin."
+					)
+				);
+    }
+
+    req.user = user
 
 		next();
 	}
