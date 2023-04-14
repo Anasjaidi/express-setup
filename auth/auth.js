@@ -53,6 +53,14 @@ class Auth {
 
 		const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET_KEY)
 
+    const user = await userDAO.getUserByID(decoded.id)
+
+    if (!user) {
+      next(AppError.Unauthorized("no user found."));
+    }
+
+    console.log(user);
+
 		next();
 	}
 

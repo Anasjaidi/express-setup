@@ -19,7 +19,7 @@ class UserDAO {
 	}
 
 	async getUserByID(ID) {
-		return await this.user.find({
+		return await this.user.findFirst({
 			where: {
 				uid: ID,
 			},
