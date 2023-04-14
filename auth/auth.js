@@ -1,6 +1,7 @@
 const userDAO = require("../models/userDAO");
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const AppError = require("../errors/AppError");
 
 class Auth {
   constructor() {
@@ -13,6 +14,14 @@ class Auth {
     const token = await this.generateToken(user.uid, process.env.JWT_SECRET_KEY, process.env.JWT_EXPIRES_IN)
 
     return {newUser, token}
+  }
+
+  async signin(credentails) {
+    const user = await this.userDAO.getUserByEmail(credentails.email)
+
+    if (!user || !this.compare(credentails.password, user.password)) {
+      throw new AppError.Unauthorized("invalid email, or password.");
+    }
   }
 
   async hash(payload, salt) {

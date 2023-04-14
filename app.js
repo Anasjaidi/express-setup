@@ -31,7 +31,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan(process.env.MORGAN_MODE));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "./public"), { dotfiles: true }));
+app.use(express.static(path.join(__dirname, "./public"), { dotfiles: false }));
 
 // start resources
 app.use('/api/v1/user', userRouter)

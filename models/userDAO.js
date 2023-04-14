@@ -1,8 +1,9 @@
+
 const prisma = require("../prisma/client/prisma");
 
 class UserDAO {
 	constructor() {
-		this.user = prisma;
+		this.user = prisma.user
 	}
 
 	async getAllUsers() {
@@ -10,11 +11,11 @@ class UserDAO {
 	}
 
 	async getFiltredUser(filters) {
-		return await user.findMany({ where: filters });
+		return await this.user.findMany({ where: filters });
 	}
 
 	async addNewUser(user) {
-		return await prisma.user.create({ data: user });
+		return await this.user.create({ data: user });
 	}
 
 	async getUserByID(ID) {
@@ -26,7 +27,7 @@ class UserDAO {
 	}
 
 	async getUserByEmail(email) {
-		return await this.user.find({
+		return await this.user.findFirst({
 			where: {
 				email: email,
 			},
