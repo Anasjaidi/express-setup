@@ -3,7 +3,7 @@ const joi = require("joi");
 const AppError = require('../errors/AppError')
 
 
-const Validator = async (schema) => {
+const Validator = (schema) => {
 	return ErrorsWrapper(async (req, res, next) => {
 		const { error } = schema.validate(req.body);
 
